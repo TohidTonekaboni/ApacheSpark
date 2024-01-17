@@ -1,0 +1,134 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  
+[error occurred during error reporting (printing exception/signal name), id 0x7]
+
+, pid=2168, tid=0x00007fbfb03ff640
+#
+# JRE version: OpenJDK Runtime Environment (8.0_382-b05) (build 1.8.0_382-8u382-ga-1~22.04.1-b05)
+# Java VM: OpenJDK 64-Bit Server VM (25.382-b05 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# V  [libjvm.so+0xa35f66]
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fbfa4429000):  JavaThread "dispatcher-CoarseGrainedScheduler" daemon [_thread_in_vm, id=2270, stack(0x00007fbfb0300000,0x00007fbfb0400000)]
+
+siginfo: si_signo: 7 (SIGBUS), si_code: 2 (BUS_ADRERR), si_addr: 0x00007fbffe210a9e
+
+Registers:
+RAX=0x00000000000021a6, RBX=0x00007fbffe1fd010, RCX=0x00000000000021a7, RDX=0x00007fbffe20e8f8
+RSP=0x00007fbfb03fcee0, RBP=0x00007fbfb03fd5d0, RSI=0x0000000000008204, RDI=0x00007fbffe221bd0
+R8 =0x00007fbffe221b90, R9 =0x00007fbffe1fd010, R10=0x0000000000000001, R11=0x0000000000000000
+R12=0x00007fbfb03fcf90, R13=0x00007fbfa4429000, R14=0x00007fbfa44297a0, R15=0x00007fbfb03fcf30
+RIP=0x00007fc012568f66, EFLAGS=0x0000000000010202, CSGSFS=0x002b000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007fbfb03fcee0)
+0x00007fbfb03fcee0:   00007fbfb03fd4c0 00007fbfb03fcf60
+0x00007fbfb03fcef0:   00000000000003d8 00007fbfa4429000
+0x00007fbfb03fcf00:   00007fbfb03fd6f0 00007fbfb03fd66c
+0x00007fbfb03fcf10:   00007fbfc8093170 00007fbfc8093180
+0x00007fbfb03fcf20:   00007fbfc8093170 00007fbfc8093558
+0x00007fbfb03fcf30:   00007fbfb03fe0b0 00007fbffe206564
+0x00007fbfb03fcf40:   00007fbffe1fd010 00007fbf00000000
+0x00007fbfb03fcf50:   00007fbfb03fe828 00007fbfb03fe0b0
+0x00007fbfb03fcf60:   00007fbffe20e8f8 00007fbf000021a7
+0x00007fbfb03fcf70:   00007fbffe1fd010 0000000000000000
+0x00007fbfb03fcf80:   0000000000000000 00007fbfb03fde10
+0x00007fbfb03fcf90:   00007fbfb03fe0b0 00007fbffe206564
+0x00007fbfb03fcfa0:   00007fbffe1fd010 00007fbf00000000
+0x00007fbfb03fcfb0:   00007fbfb03fe828 00007fbfb03fe0b0
+0x00007fbfb03fcfc0:   00007fbfa4429000 00007fbffdc696a4
+0x00007fbfb03fcfd0:   00007fbef1423898 000011040c0d30c0
+0x00007fbfb03fcfe0:   00007fbfb03fd7e8 00000000fdc696a4
+0x00007fbfb03fcff0:   0000000000000003 00007fc00c068fe0
+0x00007fbfb03fd000:   00000000e050e020 00000000f7a0b590
+0x00007fbfb03fd010:   00007fbfb03fd080 00007fc011dfd856
+0x00007fbfb03fd020:   00007fbfb03fd7e8 00007fbffd8d3dbc
+0x00007fbfb03fd030:   00007fbfb3fe3ee8 00007fbfa4429000
+0x00007fbfb03fd040:   00007fbfb03fd7e8 00007fbffd8d3dbc
+0x00007fbfb03fd050:   00007fbefb41c1c0 00007fbfa4429910
+0x00007fbfb03fd060:   0000000000000003 00007fbfb3fe3ee8
+0x00007fbfb03fd070:   00000000f7a0b5c0 00007fbffd3250d4
+0x00007fbfb03fd080:   00007fbfb03fd130 00007fc012584866
+0x00007fbfb03fd090:   0000000000000003 00007fc01247a0c0
+0x00007fbfb03fd0a0:   00007fbfb03fd210 00007fbfb03fd1b0
+0x00007fbfb03fd0b0:   00007fbfb03fd100 00007fc0120bab2a
+0x00007fbfb03fd0c0:   00000000e050e020 00000000e050df30
+0x00007fbfb03fd0d0:   00007fbf00000000 00000000e050df68 
+
+Instructions: (pc=0x00007fc012568f66)
+0x00007fc012568f46:   01 48 89 9d a0 f9 ff ff 48 89 95 90 f9 ff ff 48
+0x00007fc012568f56:   c7 85 a8 f9 ff ff 00 00 00 00 89 8d 98 f9 ff ff
+0x00007fc012568f66:   0f b6 34 02 81 fe bf 00 00 00 0f 8f da 00 00 00
+0x00007fc012568f76:   8d 41 01 48 63 c9 89 75 b4 89 85 98 f9 ff ff 0f 
+
+Register to memory mapping:
+
+RAX=0x00000000000021a6 is an unknown value
+RBX=0x00007fbffe1fd010 is at entry_point+-4944 in (nmethod*)0x00007fbffe1fd010
+RCX=0x00000000000021a7 is an unknown value
+RDX=0x00007fbffe20e8f8 is at entry_point+66968 in (nmethod*)0x00007fbffe1fd010
+RSP=0x00007fbfb03fcee0 is pointing into the stack for thread: 0x00007fbfa4429000
+RBP=0x00007fbfb03fd5d0 is pointing into the stack for thread: 0x00007fbfa4429000
+RSI=0x0000000000008204 is an unknown value
+RDI=0x00007fbffe221bd0 is at entry_point+145520 in (nmethod*)0x00007fbffe1fd010
+R8 =0x00007fbffe221b90 is at entry_point+145456 in (nmethod*)0x00007fbffe1fd010
+R9 =0x00007fbffe1fd010 is at entry_point+-4944 in (nmethod*)0x00007fbffe1fd010
+R10=0x0000000000000001 is an unknown value
+R11=0x0000000000000000 is an unknown value
+R12=0x00007fbfb03fcf90 is pointing into the stack for thread: 0x00007fbfa4429000
+R13=0x00007fbfa4429000 is a thread
+R14=0x00007fbfa44297a0 is an unknown value
+R15=0x00007fbfb03fcf30 is pointing into the stack for thread: 0x00007fbfa4429000
+
+
+Stack: [0x00007fbfb0300000,0x00007fbfb0400000],  sp=0x00007fbfb03fcee0,  free space=1011k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xa35f66]
+V  [libjvm.so+0xa39523]
+V  [libjvm.so+0xa3a10e]
+V  [libjvm.so+0xa3a998]
+v  ~RuntimeStub::resolve_virtual_call
+J 7516 C1 org.apache.spark.scheduler.cluster.CoarseGrainedSchedulerBackend$DriverEndpoint$$anonfun$receive$1.applyOrElse(Ljava/lang/Object;Lscala/Function1;)Ljava/lang/Object; (999 bytes) @ 0x00007fbffe206564 [0x00007fbffe1fe360+0x8204]
+J 3459 C1 org.apache.spark.rpc.netty.Inbox.$anonfun$process$1(Lorg/apache/spark/rpc/netty/Inbox;Lscala/runtime/ObjectRef;Lorg/apache/spark/rpc/netty/Dispatcher;)V (470 bytes) @ 0x00007fbffd897bac [0x00007fbffd894e80+0x2d2c]
+J 3458 C1 org.apache.spark.rpc.netty.Inbox$$Lambda$456.apply$mcV$sp()V (16 bytes) @ 0x00007fbffd8947cc [0x00007fbffd894740+0x8c]
+J 3469 C1 org.apache.spark.rpc.netty.Inbox.safelyCall(Lorg/apache/spark/rpc/RpcEndpoint;Lscala/Function0;)V (210 bytes) @ 0x00007fbffd89d0f4 [0x00007fbffd89cfe0+0x114]
+J 3293 C1 org.apache.spark.rpc.netty.Inbox.process(Lorg/apache/spark/rpc/netty/Dispatcher;)V (181 bytes) @ 0x00007fbffd8511d4 [0x00007fbffd850820+0x9b4]
+j  org.apache.spark.rpc.netty.MessageLoop.org$apache$spark$rpc$netty$MessageLoop$$receiveLoop()V+54
+j  org.apache.spark.rpc.netty.MessageLoop$$anon$1.run()V+4
+j  java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V+95
+j  java.util.concurrent.ThreadPoolExecutor$Worker.run()V+5
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x6a1985]
+V  [libjvm.so+0x69f0af]
+V  [libjvm.so+0x69f6a1]
+V  [libjvm.so+0x747192]
+V  [libjvm.so+0xae3dd5]
+V  [libjvm.so+0x97fe90]
+C  [libc.so.6+0x94b43]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+v  ~RuntimeStub::resolve_virtual_call
+J 7516 C1 org.apache.spark.scheduler.cluster.CoarseGrainedSchedulerBackend$DriverEndpoint$$anonfun$receive$1.applyOrElse(Ljava/lang/Object;Lscala/Function1;)Ljava/lang/Object; (999 bytes) @ 0x00007fbffe206564 [0x00007fbffe1fe360+0x8204]
+J 3459 C1 org.apache.spark.rpc.netty.Inbox.$anonfun$process$1(Lorg/apache/spark/rpc/netty/Inbox;Lscala/runtime/ObjectRef;Lorg/apache/spark/rpc/netty/Dispatcher;)V (470 bytes) @ 0x00007fbffd897bac [0x00007fbffd894e80+0x2d2c]
+J 3458 C1 org.apache.spark.rpc.netty.Inbox$$Lambda$456.apply$mcV$sp()V (16 bytes) @ 0x00007fbffd8947cc [0x00007fbffd894740+0x8c]
+J 3469 C1 org.apache.spark.rpc.netty.Inbox.safelyCall(Lorg/apache/spark/rpc/RpcEndpoint;Lscala/Function0;)V (210 bytes) @ 0x00007fbffd89d0f4 [0x00007fbffd89cfe0+0x114]
+J 3293 C1 org.apache.spark.rpc.netty.Inbox.process(Lorg/apache/spark/rpc/netty/Dispatcher;)V (181 bytes) @ 0x00007fbffd8511d4 [0x00007fbffd850820+0x9b4]
+j  org.apache.spark.rpc.netty.MessageLoop.org$apache$spark$rpc$netty$MessageLoop$$receiveLoop()V+54
+j  org.apache.spark.rpc.netty.MessageLoop$$anon$1.run()V+4
+j  java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V+95
+j  java.util.concurrent.ThreadPoolExecutor$Worker.run()V+5
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
