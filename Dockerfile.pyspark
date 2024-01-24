@@ -1,0 +1,26 @@
+# Use a base image that includes Python and Spark
+FROM jupyter/base-notebook:python-3.9
+
+# Install OpenJDK 11 as root user
+USER root
+RUN apt-get update && \
+    apt-get install --fix-missing -y openjdk-11-jdk
+
+# Set environment variables for PySpark and Java
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+
+# Switch back to the non-root user (jovyan by default in jupyter/base-notebook)
+USER jovyan
+
+# Configure Jupyter Notebook to disable the token requirement
+RUN mkdir -p /home/jovyan/.jupyter && \
+    echo "c.NotebookApp.token = ''" > /home/jovyan/.jupyter/jupyter_notebook_config.py
+
+# Install PySpark as the non-root user
+RUN pip install pyspark
+
+# Expose port for Jupyter Notebook
+EXPOSE 8888
+
+# Set the working directory
+WORKDIR /home/jovyan/work
