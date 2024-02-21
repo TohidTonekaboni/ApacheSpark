@@ -1,0 +1,145 @@
+version: '3'
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    hostname:
+      namenode
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+      - ./data/hadoop:/data
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+    networks:
+      - services
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    hostname:
+      datanode
+    ports:
+      - 9864:9864
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+    networks:
+      - services
+
+  spark-master:
+    image: docker.io/bitnami/spark:3.5
+    container_name: spark-master
+    hostname: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_USER=spark
+    volumes:
+      - ./data/apps:/spark-apps
+      - ./data/data:/spark-data
+    ports:
+      - '8080:8080'
+    networks:
+      - services
+
+  spark-worker:
+    image: docker.io/bitnami/spark:3.5
+    container_name: spark-worker
+    hostname: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=2
+      - SPARK_DRIVER_MEMORY=1G
+      - SPARK_EXECUTOR_MEMORY=512M
+      - SPARK_LOCAL_IP=spark-worker
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_USER=spark
+      - SPARK_LOCAL_IP=0.0.0.0
+    volumes:
+      - ./data/apps:/spark-apps
+      - ./data/data:/spark-data
+    ports:
+      - "8081:8081"
+    networks:
+      - services
+
+  # spark-worker2:
+  #   image: docker.io/bitnami/spark:3.5
+  #   container_name: spark-worker2
+  #   hostname: spark-worker2
+  #   environment:
+  #     - SPARK_MODE=worker
+  #     - SPARK_MASTER_URL=spark://spark-master:7077
+  #     - SPARK_WORKER_MEMORY=1G
+  #     - SPARK_WORKER_CORES=2
+  #     - SPARK_DRIVER_MEMORY=1G
+  #     - SPARK_EXECUTOR_MEMORY=512M
+  #     - SPARK_LOCAL_IP=spark-worker
+  #     - SPARK_RPC_AUTHENTICATION_ENABLED=no
+  #     - SPARK_RPC_ENCRYPTION_ENABLED=no
+  #     - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+  #     - SPARK_SSL_ENABLED=no
+  #     - SPARK_USER=spark
+  #     - SPARK_LOCAL_IP=0.0.0.0
+  #   ports:
+  #     - "8082:8082"
+  #   networks:
+  #     - services
+
+  # postgres-server:
+  #   container_name: ${CONTAINER_NAME:-postgres-server}
+  #   hostname: ${CONTAINER_NAME:-postgres-server}
+  #   image: postgres:${PG_VERSION:-14-alpine}
+  #   volumes:
+  #     - ./${PG_DATA_FOLDER:-data/postgres/mta_data}:/var/lib/postgresql/data
+  #     - ./data/postgres:/data
+  #   environment:
+  #     - POSTGRES_PASSWORD=${DB_PASS:-nikamooz123}
+  #     - POSTGRES_USER=${DB_USER:-nikamooz}
+  #     - POSTGRES_DB=${DB_NAME:-mta_data}
+  #   networks:
+  #     - services
+  #   ports:
+  #     - ${PORT:-5432}:5432
+  jupyter:
+    container_name: pyspark
+    hostname: pyspark
+    build:
+      context: .
+      dockerfile: Dockerfile.pyspark
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    ports:
+      - '8888:8888'
+      - '4040:4040'
+    volumes:
+      - ./data/apps:/spark-apps
+      - ./data/data:/spark-data
+      - ./notebooks:/home/jovyan/work
+    networks:
+      - services
+networks: 
+  services:
+    name: ${APP_NAME:-ut}_network
+volumes:
+  hadoop_datanode: {}
+  hadoop_namenode: {}

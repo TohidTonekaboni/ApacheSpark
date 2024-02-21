@@ -4,10 +4,10 @@ FROM jupyter/base-notebook:python-3.9
 # Install OpenJDK 11 as root user
 USER root
 RUN apt-get update && \
-    apt-get install --fix-missing -y openjdk-11-jdk
+    apt-get install --fix-missing -y openjdk-8-jdk
 
 # Set environment variables for PySpark and Java
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Switch back to the non-root user (jovyan by default in jupyter/base-notebook)
 USER jovyan
