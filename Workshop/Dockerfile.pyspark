@@ -94,7 +94,6 @@ FROM jupyter/pyspark-notebook:latest
 
 # Additional dependencies you might need beyond pyspark-notebook
 RUN pip install pandas numpy matplotlib 
-
 # Set a working directory within the container
 WORKDIR /home/jovyan/work
 
